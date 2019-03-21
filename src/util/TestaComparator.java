@@ -9,22 +9,17 @@ public class TestaComparator {
     private Set<User> login, data;
     
     public TestaComparator() {
-        login = new TreeSet<>();
-        data = new TreeSet<>();
-    }
-    
-    public TestaComparator(Map<String, User> users) {
         login = new TreeSet<>(new ComparadorUser());
         data = new TreeSet<>(new ComparadorData());
-        login.addAll(users.values());
-        data.addAll(users.values());
     }
     
-    public Set<User> ordenaLogin() {
+    public Set<User> ordenaLogin(Map<String, User> users) {
+        login.addAll(users.values());
         return login;
     }
     
-    public Set<User> ordenaData() {
+    public Set<User> ordenaData(Map<String, User> users) {
+        data.addAll(users.values());
         return data;
     }
     
