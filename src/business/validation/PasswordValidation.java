@@ -17,8 +17,6 @@ public class PasswordValidation implements IPasswordValidation {
         
         else if (!password.matches(".*([A-Za-z]).*"))
             throw new UserPasswordException("Senha nao possui letras.");
-            
-
     }
 
 }

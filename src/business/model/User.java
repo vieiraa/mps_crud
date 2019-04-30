@@ -4,6 +4,7 @@ public class User {
     private String login;
     private String password;
     private Data dataNascimento;
+    boolean admin;
     
     public User() {
         dataNascimento = new Data();
@@ -43,15 +44,3 @@ public class User {
         return String.format("%s - %s", login, getDataFormatada());
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-

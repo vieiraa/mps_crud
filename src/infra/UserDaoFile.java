@@ -5,19 +5,27 @@ import java.io.OutputStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
 import java.util.stream.Stream;
 
 import business.model.Data;
 import business.model.User;
+import business.validation.ILoginValidation;
+import business.validation.IPasswordValidation;
+import business.validation.LoginValidation;
+import business.validation.PasswordValidation;
 import util.InfraException;
+import util.UserLoginException;
+import util.UserPasswordException;
 
-public class UserPersistence implements IUserPersistence {
+public class UserDaoFile implements IUserDao {
+    private Map<String, User> users;
     private OutputStream output;
     private String filename;
     
-    public UserPersistence(String f) throws InfraException {
+    public UserDaoFile(String f) throws InfraException {
         filename = f;
         
         try {
@@ -28,15 +36,19 @@ public class UserPersistence implements IUserPersistence {
             e.printStackTrace();
             throw new InfraException("Erro ao abrir arquivo para escrita", e);
         }
+        
+        users = loadUsers();
     }
     
-    @Override
     public Map<String, User> loadUsers() throws InfraException {
         Map<String, User> users = new TreeMap<>();
         
         try (Stream<String> stream = Files.lines(Paths.get(filename))){
             stream.forEach(l -> {
                 String[] user = l.split(" ");
+                for (String s : user) {
+                    System.out.println(s);
+                }
                 users.put(user[0], new User(user[0], user[1], new Data(user[2])));
             });
         } catch (IOException e) {
@@ -48,8 +60,7 @@ public class UserPersistence implements IUserPersistence {
         return users;
     }
     
-    @Override
-    public void saveUsers(Map<String, User> users) throws InfraException {
+    public void saveUsers() throws InfraException {
         for (User u : users.values()) {
             try {
                 output.write(u.getLogin().getBytes());
@@ -71,5 +82,30 @@ public class UserPersistence implements IUserPersistence {
             e.printStackTrace();
             throw new InfraException("Erro ao fechar stream", e);
         }
+    }
+    
+    public void add(String login, String senha, Data dn) throws UserLoginException, UserPasswordException {
+        User user = new User(login, senha, dn);
+        ILoginValidation lv = new LoginValidation();
+        IPasswordValidation pv = new PasswordValidation();
+        lv.validate(login);
+        pv.validate(senha);
+        users.put(login, user);
+    }
+    
+    public Map<String, User> getUsers() {
+        return users;
+    }
+    
+    public void listAll() {
+        users.values().stream().forEach(u -> System.out.println(u.toString()));
+    }
+    
+    public void list(String login) {
+        System.out.println(users.get(login).toString());
+    }
+    
+    public void del(String login) {
+        users.remove(login);
     }
 }
