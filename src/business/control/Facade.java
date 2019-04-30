@@ -6,8 +6,9 @@ public class Facade {
     private UserControl uc;
     private EventControl ec;
     
-    public Facade() {
-        
+    public Facade(UserControl u, EventControl e) {
+        uc = u;
+        ec = e;
     }
     
     public void addEvento(String nome,     
