@@ -3,6 +3,7 @@ package business.model;
 public class User {
     private String login;
     private String password;
+    private String name;
     private Data dataNascimento;
     boolean admin;
     
@@ -10,9 +11,10 @@ public class User {
         dataNascimento = new Data();
     }
     
-    public User(String l, String p, Data dn) {
+    public User(String l, String n, String p, Data dn) {
         login = l;
         password = p;
+        name = n;
         dataNascimento = dn;
     }
     

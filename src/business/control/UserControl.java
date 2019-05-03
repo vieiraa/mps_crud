@@ -1,6 +1,9 @@
 package business.control;
 
 import java.util.TreeMap;
+
+import javax.management.RuntimeErrorException;
+
 import java.util.Map;
 
 import business.model.Data;
@@ -10,24 +13,30 @@ import business.validation.IPasswordValidation;
 import business.validation.LoginValidation;
 import business.validation.PasswordValidation;
 import infra.IUserPersistence;
+import infra.UserCareTaker;
 import util.InfraException;
 import util.UserLoginException;
 import util.UserPasswordException;
 
 public class UserControl {
     private Map<String, User> users;
+    private UserCareTaker ct;
     
     public UserControl() {
         users = new TreeMap<>();
     }
     
-    public void add(String login, String senha, Data dn) throws UserLoginException, UserPasswordException {
-        User user = new User(login, senha, dn);
+    public void add(String login, String senha, String name, Data dn) throws UserLoginException, UserPasswordException {
+        User user = new User(login, senha, name, dn);
         ILoginValidation lv = new LoginValidation();
         IPasswordValidation pv = new PasswordValidation();
         lv.validate(login);
         pv.validate(senha);
         users.put(login, user);
+    }
+    
+    public void update() {
+        //
     }
     
     public Map<String, User> getUsers() {
