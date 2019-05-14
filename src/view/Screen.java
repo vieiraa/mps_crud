@@ -9,4 +9,12 @@ public class Screen {
     public Screen() {
         facade = Facade.getInstance();
     }
+    
+    public void show() {
+        
+    }
+    
+    public void showScreen() {
+        current.showScreen(this);
+    }
 }

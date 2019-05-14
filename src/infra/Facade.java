@@ -11,10 +11,12 @@ public class Facade {
     private UserControl uc;
     private EventControl ec;
     private static Facade instance;
+    private FacebookAdapter fa;
     
     private Facade() {
         uc = new UserControl();
         ec = new EventControl();
+        fa = new FacebookAdapter();
     }
     
     public void addEvento(String nome,     
@@ -71,5 +73,9 @@ public class Facade {
             instance = new Facade();
         
         return instance;
+    }
+    
+    public User getLoggedUser() {
+        return fa.getAuthUser();
     }
 }
