@@ -6,6 +6,7 @@ import java.util.Map;
 import business.model.Data;
 import business.model.Event;
 import business.model.User;
+import infra.FilterStrategy;
 
 public class EventControl {
     private Map<Long, Event> eventos;
