@@ -37,7 +37,7 @@ public class UserPersistence implements IUserPersistence {
         try (Stream<String> stream = Files.lines(Paths.get(filename))){
             stream.forEach(l -> {
                 String[] user = l.split(" ");
-                users.put(user[0], new User(user[0], user[1], new Data(user[2])));
+                users.put(user[0], new User(user[0], user[1], user[2], new Data(user[3])));
             });
         } catch (IOException e) {
             // TODO Auto-generated catch block

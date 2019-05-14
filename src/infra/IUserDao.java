@@ -9,7 +9,7 @@ import util.UserLoginException;
 import util.UserPasswordException;
 
 public interface IUserDao {
-    void add(String login, String senha, Data data) throws UserLoginException, UserPasswordException;
+    void add(String login, String senha, String name, Data data) throws UserLoginException, UserPasswordException;
     void del(String login);
     Map<String, User> getUsers();
     void listAll();

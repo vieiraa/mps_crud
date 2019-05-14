@@ -12,9 +12,7 @@ import util.UserPasswordException;
 public class Main {
 
     public static void main(String[] args) throws InfraException, UserLoginException, UserPasswordException {
-        IUserDao dao = new UserDaoFile("/home/jordy/teste.txt");
-        dao.add("jordy", "jordy1", new Data("10/01/1997"));
-        dao.saveUsers();
+        
     }
 
 }

@@ -20,8 +20,8 @@ public class UserDaoMemory implements IUserDao {
         users = new HashMap<String, User>();
     }
     
-    public void add(String login, String senha, Data dn) throws UserLoginException, UserPasswordException {
-        User user = new User(login, senha, dn);
+    public void add(String login, String senha, String nome, Data dn) throws UserLoginException, UserPasswordException {
+        User user = new User(login, senha, nome, dn);
         ILoginValidation lv = new LoginValidation();
         IPasswordValidation pv = new PasswordValidation();
         lv.validate(login);

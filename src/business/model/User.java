@@ -42,6 +42,14 @@ public class User {
         return dataNascimento.toString();
     }
     
+    public String getNome() {
+        return name;
+    }
+    
+    public void setNome(String n) {
+        name = n;
+    }
+    
     public String toString() {
         return String.format("%s - %s", login, getDataFormatada());
     }

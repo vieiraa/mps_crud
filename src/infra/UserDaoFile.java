@@ -49,7 +49,7 @@ public class UserDaoFile implements IUserDao {
                 for (String s : user) {
                     System.out.println(s);
                 }
-                users.put(user[0], new User(user[0], user[1], new Data(user[2])));
+                users.put(user[0], new User(user[0], user[1], user[2], new Data(user[3])));
             });
         } catch (IOException e) {
             // TODO Auto-generated catch block
@@ -67,8 +67,10 @@ public class UserDaoFile implements IUserDao {
                 output.write(" ".getBytes());
                 output.write(u.getPassword().getBytes());
                 output.write(" ".getBytes());
+                output.write(u.getNome().getBytes());
+                output.write(" ".getBytes());
                 output.write(u.getDataFormatada().getBytes());
-                output.write("\n".getBytes());     
+                output.write("\n".getBytes());
             } catch (IOException e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
@@ -84,8 +86,8 @@ public class UserDaoFile implements IUserDao {
         }
     }
     
-    public void add(String login, String senha, Data dn) throws UserLoginException, UserPasswordException {
-        User user = new User(login, senha, dn);
+    public void add(String login, String senha, String nome, Data dn) throws UserLoginException, UserPasswordException {
+        User user = new User(login, senha, nome, dn);
         ILoginValidation lv = new LoginValidation();
         IPasswordValidation pv = new PasswordValidation();
         lv.validate(login);
