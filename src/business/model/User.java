@@ -1,11 +1,15 @@
 package business.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class User {
     private String login;
     private String password;
     private String name;
     private Data dataNascimento;
-    boolean admin;
+    private boolean admin;
+    private List<Event> events;
     
     public User() {
         dataNascimento = new Data();
@@ -16,6 +20,7 @@ public class User {
         password = p;
         name = n;
         dataNascimento = dn;
+        events = new ArrayList<Event>();
     }
     
     public String getLogin() {
@@ -52,5 +57,21 @@ public class User {
     
     public String toString() {
         return String.format("%s - %s", login, getDataFormatada());
+    }
+
+    public List<Event> getEvents() {
+        return events;
+    }
+
+    public void setEvents(List<Event> e) {
+        this.events = e;
+    }
+    
+    public void addEvent(Event e) {
+        events.add(e);
+    }
+    
+    public void removeEvent(Event e) {
+        events.remove(e);
     }
 }

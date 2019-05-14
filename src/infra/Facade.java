@@ -1,14 +1,20 @@
-package business.control;
+package infra;
 
+import business.control.EventControl;
+import business.control.UserControl;
 import business.model.Data;
+import business.model.Event;
+import business.model.User;
 
+// Singleton
 public class Facade {
     private UserControl uc;
     private EventControl ec;
+    private static Facade instance;
     
-    public Facade(UserControl u, EventControl e) {
-        uc = u;
-        ec = e;
+    private Facade() {
+        uc = new UserControl();
+        ec = new EventControl();
     }
     
     public void addEvento(String nome,     
@@ -20,7 +26,15 @@ public class Facade {
         
     }
     
-    public void addUser(String login, String pw) {
+    public void addEvento(String login, Event e) {
+        
+    }
+    
+    public void addUser(String login, String pw, String name, Data dn) {
+        
+    }
+    
+    public void addUser(User u) {
         
     }
     
@@ -50,5 +64,12 @@ public class Facade {
     
     public void generateReportJSON() {
         
+    }
+    
+    public static Facade getInstance() {
+        if (instance == null)
+            instance = new Facade();
+        
+        return instance;
     }
 }

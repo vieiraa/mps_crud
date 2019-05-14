@@ -1,6 +1,9 @@
 package infra;
 
+import business.model.Event;
+import business.model.User;
+
 public interface FacebookHandler {
-    void getEvent();
-    void getAuthUser();
+    Event getEvent(long id);
+    User getAuthUser();
 }

@@ -1,19 +1,29 @@
 package infra;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import business.model.Data;
+import business.model.Event;
+import business.model.User;
+
 public class FacebookAdapter implements FacebookHandler {
+    private List<Event> events;
+    private User loggedUser;
+    
     public FacebookAdapter() {
-        // TODO Auto-generated constructor stub
+        loggedUser = new User("admin", "123", "Adm", new Data("01/01/1970"));
+        events = new ArrayList<>();
+        events.add(new Event("Festa", "somewhere", new Data("14/05/2019"), "23:59", "Festa", 0.0f));
     }
 
     @Override
-    public void getEvent() {
-        // TODO Auto-generated method stub
-        
+    public Event getEvent(long id) {
+        return events.stream().filter(e -> e.getId() == id).findFirst().get();
     }
 
     @Override
-    public void getAuthUser() {
-        // TODO Auto-generated method stub
-        
+    public User getAuthUser() {
+        return loggedUser;
     }
 }

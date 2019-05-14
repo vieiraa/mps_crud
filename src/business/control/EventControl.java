@@ -1,5 +1,6 @@
 package business.control;
 
+import java.util.List;
 import java.util.Map;
 
 import business.model.Data;
@@ -8,7 +9,8 @@ import business.model.User;
 
 public class EventControl {
     private Map<Long, Event> eventos;
-    EventControl() {};
+    
+    public EventControl() {};
     
     void add(String nome,
              String lat, String lng,

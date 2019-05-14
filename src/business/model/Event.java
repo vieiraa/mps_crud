@@ -3,21 +3,25 @@ package business.model;
 public class Event {
     private static long id = 0;
     private String nome;
-    private String lat, lng;
+    private String location;
     private Data data;
     private String horario;
     private String desc;
     private float preco;
     
-    public Event(String nome, String lat, String lng, Data data, String horario, String desc, float preco) {
+    public Event(String nome, String l, Data data, String horario, String desc, float preco) {
         super();
         this.nome = nome;
-        this.lat = lat;
-        this.lng = lng;
+        this.location = l;
         this.data = data;
         this.horario = horario;
         this.desc = desc;
         this.preco = preco;
+        id++;
+    }
+    
+    public long getId() {
+        return id;
     }
     
     public String getNome() {
@@ -28,20 +32,12 @@ public class Event {
         this.nome = nome;
     }
 
-    public String getLat() {
-        return lat;
+    public String getLocation() {
+        return location;
     }
-
-    public void setLat(String lat) {
-        this.lat = lat;
-    }
-
-    public String getLng() {
-        return lng;
-    }
-
-    public void setLng(String lng) {
-        this.lng = lng;
+    
+    public void setLocation(String l) {
+        location = l;
     }
 
     public Data getData() {
@@ -74,5 +70,12 @@ public class Event {
 
     public void setPreco(float preco) {
         this.preco = preco;
+    }
+    
+    public String toString() {
+        return "Nome: " + nome + "\n" +
+               "Local: " + location + "\n" +
+               "Data: " + data.toString() + "\n" +
+               "Preço: " + preco;
     }
 }
