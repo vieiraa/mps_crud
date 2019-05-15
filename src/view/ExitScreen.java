@@ -9,7 +9,7 @@ public class ExitScreen implements ScreenState {
     
     @Override
     public void showScreen(Screen screen) {
-        
+        System.out.println("Ate mais");
     }
     
     public static ExitScreen getInstance() {

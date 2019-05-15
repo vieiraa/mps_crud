@@ -1,16 +1,37 @@
 package view;
 
+import java.util.Scanner;
+
 public class MainScreen implements ScreenState {
     private static MainScreen instance;
+    private Scanner scan;
     
     private MainScreen() {
-        // TODO Auto-generated constructor stub
+        scan = new Scanner(System.in);
     }
     
     @Override
     public void showScreen(Screen screen) {
-        // TODO Auto-generated method stub
-
+        screen.getFacade().listUserEvents(screen.getFacade().getLoggedUser().getLogin());
+        
+        System.out.println("1. Filtrar eventos");
+        System.out.println("2. Ver mapa");
+        System.out.println("0. Sair");
+        int op = scan.nextInt();
+        switch (op) {
+        case 0:
+            screen.setState(ExitScreen.getInstance());
+            break;
+        case 1:
+            screen.setState(FilterScreen.getInstance());
+            break;
+        case 2:
+            screen.setState(MapScreen.getInstance());
+            break;
+        default:
+            System.out.println("Opcao invalida.");
+            screen.setState(this);
+        }
     }
     
     public static MainScreen getInstance() {

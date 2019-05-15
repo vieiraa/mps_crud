@@ -1,30 +1,41 @@
 package view;
 
-import java.util.Scanner;
-
 import infra.Facade;
 
 public class Screen {
-    private ScreenState current;
+    private ScreenState current, exit;
     private Facade facade;
-    private Scanner scan;
     
     public Screen() {
         facade = Facade.getInstance();
-        current = StartScreen.getInstance();
-        scan = new Scanner(System.in);
+        
+        exit = ExitScreen.getInstance();
     }
     
     public void show() {
-        
-        System.out.println("Bem-vindo ao Event Horizon.");
-        if (facade.getLoggedUser() == null) {
+        while (current != exit) {
+            System.out.println("Bem-vindo ao Event Horizon.");
+            if (facade.getLoggedUser() == null)
+                current = StartScreen.getInstance();
             
+            else
+                current = MainScreen.getInstance();
+            
+            showScreen();
         }
         
+        showScreen();
     }
     
     public void showScreen() {
         current.showScreen(this);
+    }
+    
+    public Facade getFacade() {
+        return facade;
+    }
+    
+    public void setState(ScreenState s) {
+        current = s;
     }
 }

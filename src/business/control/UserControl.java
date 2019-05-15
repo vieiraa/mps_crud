@@ -19,14 +19,18 @@ import util.UserLoginException;
 import util.UserPasswordException;
 
 public class UserControl {
+    private static UserControl instance;
     private Map<String, User> users;
     private UserCareTaker ct;
     
-    public UserControl() {
+    private UserControl() {
         users = new TreeMap<>();
     }
     
     public void add(String login, String senha, String name, Data dn) throws UserLoginException, UserPasswordException {
+        if (users.containsKey(login))
+            throw new UserLoginException("Login ja existe");
+        
         User user = new User(login, senha, name, dn);
         ILoginValidation lv = new LoginValidation();
         IPasswordValidation pv = new PasswordValidation();
@@ -35,12 +39,23 @@ public class UserControl {
         users.put(login, user);
     }
     
+    public void add(User u) {
+        users.put(u.getLogin(), u);
+    }
+    
     public void update() {
         //
     }
     
     public Map<String, User> getUsers() {
         return users;
+    }
+    
+    public User getUser(String login) throws UserLoginException {
+        if (users.containsKey(login))
+            return users.get(login);
+        
+        throw new UserLoginException("Login invalido");
     }
     
     public void listAll() {
@@ -71,5 +86,12 @@ public class UserControl {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
+    }
+    
+    public static UserControl getInstance() {
+        if (instance == null)
+            instance = new UserControl();
+        
+        return instance;
     }
 }

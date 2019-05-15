@@ -5,6 +5,8 @@ import business.control.UserControl;
 import business.model.Data;
 import business.model.Event;
 import business.model.User;
+import util.UserLoginException;
+import util.UserPasswordException;
 
 // Singleton
 public class Facade {
@@ -12,9 +14,10 @@ public class Facade {
     private EventControl ec;
     private static Facade instance;
     private FacebookAdapter fa;
+    private User logged;
     
     private Facade() {
-        uc = new UserControl();
+        uc = UserControl.getInstance();
         ec = new EventControl();
         fa = new FacebookAdapter();
     }
@@ -32,12 +35,14 @@ public class Facade {
         
     }
     
-    public void addUser(String login, String pw, String name, Data dn) {
-        
+    public void addUser(String login, String pw, String name, String dn) throws UserLoginException, UserPasswordException {
+        User u = new User(login, pw, name, new Data(dn));
+        uc.add(u);
+        logged = u;
     }
     
-    public void addUser(User u) {
-        
+    public void addUser(User u) throws UserLoginException, UserPasswordException {
+        addUser(u.getLogin(), u.getPassword(), u.getNome(), u.getData().toString());
     }
     
     public void listEvent(long id) {
@@ -48,7 +53,7 @@ public class Facade {
         
     }
     
-    public void listUser(String login) {
+    public void listUserEvents(String login) {
         
     }
     
@@ -76,6 +81,19 @@ public class Facade {
     }
     
     public User getLoggedUser() {
-        return fa.getAuthUser();
+        return logged;
+    }
+    
+    public void login(String login, String pass) throws UserLoginException, UserPasswordException {
+        User user = uc.getUser(login);
+        
+        if (user.getPassword() == pass)
+            logged = user;
+        else
+            throw new UserPasswordException("Senha invalida");
+    }
+    
+    public void setLoggedUser(User u) {
+        logged = u;
     }
 }
