@@ -8,11 +8,13 @@ import business.model.Event;
 public class LocationFilter implements FilterStrategy {
     
     @Override
-    public List<Event> filter(List<Event> events, String location) {        
+    public void filter(List<Event> events, String location) {        
         List<Event> ret = events.stream()
                          .filter(e -> e.getLocation() == location)
                          .collect(Collectors.toList());
         
-        return ret;
+        for (Event e : ret) {
+            System.out.println(e.toString());
+        }
     }
 }

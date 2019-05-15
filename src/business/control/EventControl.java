@@ -24,27 +24,27 @@ public class EventControl {
         
     }
     
-    Map<Long, Event> getEventos() {
+    public Map<Long, Event> getEventos() {
         return eventos;
     }
     
-    void list(long id) {
+    public void list(long id) {
         
     }
     
-    void listAll() {
+    public void listAll() {
         
     }
     
-    void del(long id) {
+    public void del(long id) {
         
     }
     
-    void saveEventos() {
+    public void saveEventos() {
         
     }
     
-    void loadEvetos() {
+    public void loadEvetos() {
         
     }
 }

@@ -46,11 +46,11 @@ public class Facade {
     }
     
     public void listEvent(long id) {
-        
+        ec.list(id);
     }
     
     public void listAllEvents() {
-        
+        ec.listAll();
     }
     
     public void listUserEvents(String login) {

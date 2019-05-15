@@ -6,6 +6,8 @@ import java.util.List;
 import business.model.Data;
 import business.model.Event;
 import business.model.User;
+import util.UserLoginException;
+import util.UserPasswordException;
 
 public class AddUserCommand implements Command {
     Facade facade;
@@ -25,7 +27,7 @@ public class AddUserCommand implements Command {
     }
     
     @Override
-    public void execute() {
+    public void execute() throws UserLoginException, UserPasswordException {
         User user = askUser();
         facade.addUser(user);
     }
