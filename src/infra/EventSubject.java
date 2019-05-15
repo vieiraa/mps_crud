@@ -3,6 +3,7 @@ package infra;
 import java.util.ArrayList;
 import java.util.List;
 
+import business.model.Data;
 import business.model.Event;
 
 // Observer
@@ -19,7 +20,12 @@ public class EventSubject {
     }
     
     public void notifyUser() {
-        List<Event> todayEvents = new ArrayList<>();
+        Data today = new Data("");
+        for (Event e : fa.getAuthUser().getEvents()) {
+            if (e.getData().equals(today)) {
+                
+            }
+        }
         
     }
 }

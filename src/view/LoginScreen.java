@@ -15,24 +15,18 @@ public class LoginScreen implements ScreenState {
     
     @Override
     public void showScreen(Screen screen) {
-        while (true) {
-            System.out.println("Login: ");
-            String login = scan.next();
-            System.out.println("Senha: ");
-            String senha = scan.next();
-            
-            try {
-                screen.getFacade().login(login, senha);
-            } catch (UserLoginException | UserPasswordException e) {
-                System.out.println(e.getMessage());
-                continue;
-            }
-            
+        System.out.println("Login: ");
+        String login = scan.next();
+        System.out.println("Senha: ");
+        String senha = scan.next();
+        
+        try {
+            screen.getFacade().login(login, senha);
             screen.setState(MainScreen.getInstance());
-            break;
+        } catch (UserLoginException | UserPasswordException e) {
+            System.out.println(e.getMessage());
+            screen.setState(this);
         }
-        
-        
     }
     
     public static LoginScreen getInstance() {

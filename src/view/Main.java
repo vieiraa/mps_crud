@@ -12,7 +12,8 @@ import util.UserPasswordException;
 public class Main {
 
     public static void main(String[] args) throws InfraException, UserLoginException, UserPasswordException {
-        
+        Screen s = new Screen();
+        s.show();
     }
 
 }

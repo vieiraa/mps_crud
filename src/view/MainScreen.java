@@ -12,11 +12,18 @@ public class MainScreen implements ScreenState {
     
     @Override
     public void showScreen(Screen screen) {
+        if (screen.getFacade().getLoggedUser() == null) {
+            screen.setState(StartScreen.getInstance());
+            return;
+        }
+        
         screen.getFacade().listUserEvents(screen.getFacade().getLoggedUser().getLogin());
         
         System.out.println("1. Filtrar eventos");
         System.out.println("2. Ver mapa");
+        System.out.println("3. Listar todos os eventos");
         System.out.println("0. Sair");
+        
         int op = scan.nextInt();
         switch (op) {
         case 0:
@@ -27,6 +34,10 @@ public class MainScreen implements ScreenState {
             break;
         case 2:
             screen.setState(MapScreen.getInstance());
+            break;
+        case 3:
+            screen.getFacade().listAllEvents();
+            screen.setState(this);
             break;
         default:
             System.out.println("Opcao invalida.");

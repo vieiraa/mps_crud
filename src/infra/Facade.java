@@ -18,7 +18,7 @@ public class Facade {
     
     private Facade() {
         uc = UserControl.getInstance();
-        ec = new EventControl();
+        ec = EventControl.getInstance();
         fa = new FacebookAdapter();
     }
     
@@ -54,7 +54,18 @@ public class Facade {
     }
     
     public void listUserEvents(String login) {
-        
+        try {
+            if (uc.getUser(login).getEvents().size() == 0) {
+                System.out.println("Usuario nao possui eventos");
+                return;
+            }
+            for (Event e : uc.getUser(login).getEvents()) {
+                System.out.println(e.toString());
+            }
+        } catch (UserLoginException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
     }
     
     public void delEvent(long id) {

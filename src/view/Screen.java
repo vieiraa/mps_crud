@@ -8,19 +8,13 @@ public class Screen {
     
     public Screen() {
         facade = Facade.getInstance();
-        
+        current = MainScreen.getInstance();
         exit = ExitScreen.getInstance();
     }
     
     public void show() {
         while (current != exit) {
-            System.out.println("Bem-vindo ao Event Horizon.");
-            if (facade.getLoggedUser() == null)
-                current = StartScreen.getInstance();
-            
-            else
-                current = MainScreen.getInstance();
-            
+            System.out.flush();
             showScreen();
         }
         
